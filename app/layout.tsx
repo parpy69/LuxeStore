@@ -6,8 +6,15 @@ import { ChatBot } from "@/components/ChatBot";
 import { CartProvider } from "@/context/CartContext";
 
 export const metadata: Metadata = {
-  title: "LuxeStore - Premium Shopping Experience",
-  description: "Discover premium products at unbeatable prices",
+  title: "LuxeStore - Premium E-Commerce | AI-Powered Shopping",
+  description: "Shop premium electronics, accessories, and footwear with AI-powered customer support. Free shipping on orders over $100. Built with Next.js 15 & Groq AI.",
+  keywords: ["e-commerce", "online shopping", "premium products", "AI chatbot", "electronics", "accessories"],
+  authors: [{ name: "Abdullah Khudeish" }],
+  openGraph: {
+    title: "LuxeStore - Premium E-Commerce Platform",
+    description: "Shop premium products with AI-powered support",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
