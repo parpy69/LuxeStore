@@ -17,6 +17,7 @@ A **production-ready** e-commerce website built with **Next.js 15**, **TypeScrip
 
 - 🤖 **AI-Powered Support** - Groq integration with Llama 3.1 providing direct product links
 - 🔗 **Smart Product Links** - AI can send clickable URLs to specific products
+- 🔍 **Live Search** - Real-time product search with instant filtering and results
 - 📄 **Product Detail Pages** - Full pages for each product with reviews, specs, and related items
 - ⚡ **Latest Tech Stack** - Next.js 15, TypeScript, Tailwind CSS, React Context API
 - 🛒 **Full E-Commerce** - Complete shopping cart with add/remove/quantity management
@@ -36,6 +37,7 @@ A **production-ready** e-commerce website built with **Next.js 15**, **TypeScrip
 ### Product Management
 - 🏷️ **8 Premium Products** - Across Electronics, Accessories, and Footwear categories
 - 📄 **Detailed Product Pages** - Individual pages with full specs, customer reviews, and related products
+- 🔍 **Live Search** - Real-time product search with instant results and navigation
 - 🔍 **Advanced Filtering** - Enhanced filter UI with category buttons and sort options
 - ⭐ **Product Ratings** - Display ratings and stock levels with visual indicators
 - 📊 **Real-time Stock Tracking** - Shows current inventory levels with low stock warnings
@@ -73,10 +75,12 @@ A **production-ready** e-commerce website built with **Next.js 15**, **TypeScrip
 - ⚡ **Fast Performance** - Built with Next.js 15 App Router with dynamic routes
 - 🔒 **Type Safety** - Full TypeScript implementation with strict mode
 - 🎯 **State Management** - React Context API for cart state
+- 🔍 **Real-time Search** - Client-side filtering with instant results
 - 🖼️ **Optimized Images** - Next.js Image component with lazy loading
 - 🔗 **Dynamic Routes** - `/product/[id]` for individual product pages
 - 📦 **Clean Architecture** - Component-based, maintainable structure
 - 🔄 **Smart Link Parsing** - Automatic URL detection and rendering in chatbot
+- 🎨 **Smooth Animations** - CSS transitions and hover effects throughout
 
 ## 🚀 Getting Started
 
@@ -187,6 +191,13 @@ npm start
 - Slide-in drawer UI
 - Empty state handling
 
+### Navigation & Search
+- **Live Search Bar** - Click search icon to open instant search
+- **Smart Filtering** - Real-time product search across all attributes
+- **Quick Navigation** - Direct links to all pages from navbar
+- **Mobile Menu** - Collapsible menu for mobile devices
+- **Sticky Navbar** - Always accessible as you scroll
+
 ### AI Chatbot (Groq-Powered)
 - **Real AI Intelligence** - Uses Llama 3.1 8B model via Groq API
 - **Direct Product Links** - Provides clickable URLs to specific product pages
@@ -204,6 +215,15 @@ npm start
 - Price range: $79.99 - $1,299.99
 - Real product data with ratings and stock
 - High-quality product images with zoom effects
+
+### Live Search Feature
+- **Real-time Filtering** - Results update as you type
+- **Smart Search** - Searches across product names, categories, and descriptions
+- **Visual Results** - Shows product images, names, categories, and prices
+- **Click to Navigate** - Click any result to go directly to product page
+- **Clear Search** - Easy X button to reset search
+- **Empty State** - Helpful message with "Browse all products" link when no results
+- **Responsive Design** - Works perfectly on mobile and desktop
 
 ### Product Detail Pages
 Each product has a dedicated page (`/product/[id]`) featuring:
