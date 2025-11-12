@@ -36,43 +36,78 @@ export function ChatBot() {
   const getAIResponse = (userMessage: string): string => {
     const lowerMessage = userMessage.toLowerCase();
 
+    // Greetings
+    if (lowerMessage.match(/\b(hello|hi|hey|good morning|good afternoon)\b/)) {
+      return "Hello! Welcome to LuxeStore! How can I assist you with your shopping today?";
+    }
+
+    // Thanks
+    if (lowerMessage.match(/\b(thank|thanks|thx)\b/)) {
+      return "You're welcome! Is there anything else I can help you with?";
+    }
+
+    // Shoes/Footwear
+    if (lowerMessage.match(/\b(shoe|shoes|sneaker|footwear|boot|sandal)\b/)) {
+      return "Yes! We have a great selection of premium footwear including running shoes, casual sneakers, and more. Check out our Shop page and filter by 'Footwear' category. Our running shoes are currently $159.99 with free shipping!";
+    }
+
+    // Electronics
+    if (lowerMessage.match(/\b(electronic|headphone|watch|speaker|camera|tech|gadget)\b/)) {
+      return "We offer premium electronics including wireless headphones, smartwatches, portable speakers, and professional cameras. Prices range from $149 to $1299. All electronics come with a 1-year warranty!";
+    }
+
+    // Accessories
+    if (lowerMessage.match(/\b(accessory|accessories|wallet|backpack|bag|sunglass)\b/)) {
+      return "Our accessories collection includes leather wallets ($79.99), designer backpacks ($129.99), and polarized sunglasses ($189.99). All made with premium materials!";
+    }
+
+    // Browse/Shop
+    if (lowerMessage.match(/\b(browse|shop|buy|purchase|look|see|show|find)\b/)) {
+      return "You can browse all our products by clicking 'Shop' in the menu. We have Electronics, Accessories, and Footwear. You can filter by category and sort by price or rating. Would you like help finding something specific?";
+    }
+
     // Product inquiries
-    if (lowerMessage.includes("product") || lowerMessage.includes("item")) {
-      return "We have a wide range of premium products including electronics, accessories, and footwear. You can browse our full catalog in the Shop section. Is there a specific category you're interested in?";
+    if (lowerMessage.match(/\b(product|item|sell|available|have|stock)\b/)) {
+      return "We have 8 premium products currently in stock across 3 categories: Electronics (headphones, watches, speakers, cameras), Accessories (wallets, backpacks, sunglasses), and Footwear (running shoes). What are you interested in?";
     }
 
     // Shipping
-    if (lowerMessage.includes("ship") || lowerMessage.includes("deliver")) {
-      return "We offer free shipping on orders over $100! Standard delivery takes 3-5 business days. Express shipping is also available at checkout.";
+    if (lowerMessage.match(/\b(ship|deliver|delivery|shipping|send)\b/)) {
+      return "We offer free shipping on orders over $100! Standard delivery takes 3-5 business days. Express shipping (1-2 days) is available at checkout for $15.";
     }
 
     // Returns
-    if (lowerMessage.includes("return") || lowerMessage.includes("refund")) {
-      return "We have a 30-day return policy on all items. Products must be unused and in original packaging. You can initiate a return through your account or contact our support team.";
+    if (lowerMessage.match(/\b(return|refund|exchange|money back)\b/)) {
+      return "We have a 30-day return policy on all items. Products must be unused and in original packaging. Returns are free and you'll get a full refund within 5-7 business days!";
     }
 
     // Payment
-    if (lowerMessage.includes("payment") || lowerMessage.includes("pay")) {
-      return "We accept all major credit cards, PayPal, Apple Pay, and Google Pay. All transactions are secured with 256-bit encryption for your safety.";
+    if (lowerMessage.match(/\b(payment|pay|card|credit|paypal|apple pay)\b/)) {
+      return "We accept Visa, Mastercard, American Express, PayPal, Apple Pay, and Google Pay. All transactions are secured with 256-bit encryption for your safety!";
     }
 
-    // Pricing
-    if (lowerMessage.includes("price") || lowerMessage.includes("cost") || lowerMessage.includes("discount")) {
-      return "Our products range from $79.99 to $1299.99. We frequently have sales and special offers! Sign up for our newsletter to get exclusive deals.";
+    // Pricing/Discounts
+    if (lowerMessage.match(/\b(price|cost|expensive|cheap|discount|sale|deal|coupon)\b/)) {
+      return "Our products range from $79.99 to $1,299.99. We have regular sales - sign up for our newsletter to get 10% off your first order plus exclusive deals! Currently, all items have free shipping over $100.";
     }
 
     // Order tracking
-    if (lowerMessage.includes("track") || lowerMessage.includes("order")) {
-      return "You can track your order using the tracking number sent to your email. If you need help locating it, I can connect you with a live agent.";
+    if (lowerMessage.match(/\b(track|order|tracking|where|status)\b/)) {
+      return "You can track your order using the tracking number sent to your email after purchase. If you can't find it, I can connect you with a live agent who can look it up for you!";
     }
 
-    // Greetings
-    if (lowerMessage.includes("hello") || lowerMessage.includes("hi") || lowerMessage.includes("hey")) {
-      return "Hello! How can I assist you with your shopping today?";
+    // Complaints/Issues
+    if (lowerMessage.match(/\b(don't like|bad|terrible|awful|problem|issue|complaint|wrong)\b/)) {
+      return "I'm sorry to hear you're having an issue! I'd like to help resolve this right away. Could you tell me more about the problem? I can also connect you with a live agent for immediate assistance.";
+    }
+
+    // Quality questions
+    if (lowerMessage.match(/\b(quality|good|worth|recommend|review|rating)\b/)) {
+      return "All our products are premium quality with an average rating of 4.7/5 stars! We work directly with manufacturers to ensure the highest standards. Every product comes with our satisfaction guarantee!";
     }
 
     // Default response
-    return "I'd be happy to help! You can ask me about products, shipping, returns, payments, or anything else. If you need more detailed assistance, feel free to request a live agent.";
+    return "I can help with product info, shipping, returns, payments, pricing, and more! Feel free to ask me anything, or request a live agent for personalized assistance. What would you like to know?";
   };
 
   const handleSendMessage = async () => {
