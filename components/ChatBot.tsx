@@ -97,27 +97,32 @@ export function ChatBot() {
       return "I apologize for the inconvenience. I'm here to help resolve this. Could you provide more details about the issue? Alternatively, click 'Request Live Agent' for immediate assistance.";
     }
 
+    // Link requests
+    if (msg.match(/(link|url|where to buy|show me|buy|purchase)/)) {
+      return "You can browse all our products here: https://luxe-store-lilac.vercel.app/shop\n\nWhat product are you looking for? I can help you find it!";
+    }
+
     // Shoes/Footwear
     if (msg.match(/(shoe|footwear|sneaker|boot|sandal|trainer)/)) {
       if (msg.match(/(have|sell|got|any|do you)/)) {
-        return "Yes, we offer premium running shoes for $159.99 with advanced cushioning technology. You can view them in our Shop section under the 'Footwear' category. Free shipping is included on orders over $100.";
+        return "Yes, we offer premium running shoes for $159.99 with advanced cushioning technology. View them here: https://luxe-store-lilac.vercel.app/shop (look for 'Running Shoes'). Free shipping included on orders over $100!";
       }
-      return "Our footwear collection features high-performance running shoes priced at $159.99, with a 4.7-star rating and 42 units currently in stock. Would you like more information?";
+      return "Our footwear collection features high-performance running shoes priced at $159.99. View them here: https://luxe-store-lilac.vercel.app/shop";
     }
 
     // Electronics
     if (msg.match(/(headphone|earbud|watch|smartwatch|speaker|camera|electronic|tech|gadget)/)) {
-      return "We carry a range of premium electronics: wireless headphones ($299), smartwatches ($399), portable speakers ($149), and professional cameras ($1,299). All electronics include a 1-year warranty. Which category interests you?";
+      return "We carry premium electronics: wireless headphones ($299), smartwatches ($399), portable speakers ($149), and professional cameras ($1,299). View them here: https://luxe-store-lilac.vercel.app/shop (filter by 'Electronics'). All include a 1-year warranty!";
     }
 
     // Accessories
     if (msg.match(/(wallet|backpack|bag|sunglass|accessory|accessories)/)) {
-      return "Our accessories collection includes leather wallets ($79.99), designer backpacks ($129.99), and polarized sunglasses ($189.99). All items are crafted with premium materials. Can I help you find something specific?";
+      return "Our accessories collection includes leather wallets ($79.99), designer backpacks ($129.99), and polarized sunglasses ($189.99). Browse them here: https://luxe-store-lilac.vercel.app/shop (filter by 'Accessories')";
     }
 
     // Price questions
     if (msg.match(/(how much|price|cost|expensive|cheap)/)) {
-      return "Our products range from $79.99 for wallets to $1,299.99 for professional cameras. We offer free shipping on orders over $100. Sign up for our newsletter to receive 10% off your first order.";
+      return "Our products range from $79.99 to $1,299.99. View all products and prices here: https://luxe-store-lilac.vercel.app/shop. Free shipping on orders over $100!";
     }
 
     // Shipping
@@ -151,13 +156,13 @@ export function ChatBot() {
     }
 
     // Browsing/Shopping
-    if (msg.match(/(browse|shop|buy|purchase|see|show|looking for|want to)/)) {
-      return "You can browse our full catalog by clicking 'Shop' in the navigation menu. Products can be filtered by category (Electronics, Accessories, Footwear) and sorted by price or rating. How can I assist your search?";
+    if (msg.match(/(browse|shop|see|show|looking for|want to)/)) {
+      return "You can browse our full catalog here: https://luxe-store-lilac.vercel.app/shop\n\nProducts can be filtered by category (Electronics, Accessories, Footwear) and sorted by price or rating. What are you looking for?";
     }
 
     // What do you sell
     if (msg.match(/(what|which|tell me).*(sell|have|offer|product)/)) {
-      return "We offer premium Electronics (headphones, smartwatches, speakers, cameras), Accessories (wallets, backpacks, sunglasses), and Footwear (running shoes). Which category interests you?";
+      return "We offer premium Electronics (headphones, smartwatches, speakers, cameras), Accessories (wallets, backpacks, sunglasses), and Footwear (running shoes). Browse all products: https://luxe-store-lilac.vercel.app/shop";
     }
 
     // Contact/Agent
@@ -166,7 +171,7 @@ export function ChatBot() {
     }
 
     // Default - more helpful
-    return "I'm here to assist you. I can provide information about:\n• Products & Pricing\n• Shipping & Delivery\n• Returns & Refunds\n• Payment Options\n\nWhat would you like to know, or would you prefer to request a live agent?";
+    return "I'm here to assist you. I can provide information about:\n• Products & Pricing\n• Shipping & Delivery\n• Returns & Refunds\n• Payment Options\n\nBrowse our store: https://luxe-store-lilac.vercel.app/shop\n\nWhat would you like to know?";
   };
 
   const handleSendMessage = async () => {
