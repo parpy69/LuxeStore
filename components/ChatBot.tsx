@@ -33,6 +33,30 @@ export function ChatBot() {
     scrollToBottom();
   }, [messages]);
 
+  // Function to render text with clickable links
+  const renderMessageText = (text: string) => {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    const parts = text.split(urlRegex);
+
+    return parts.map((part, index) => {
+      if (part.match(urlRegex)) {
+        return (
+          <a
+            key={index}
+            href={part}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-blue-600 hover:text-blue-800 underline font-semibold break-all"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {part}
+          </a>
+        );
+      }
+      return <span key={index}>{part}</span>;
+    });
+  };
+
   const getAIResponse = async (userMessage: string): Promise<string> => {
     // Try to use API
     try {
@@ -291,7 +315,7 @@ export function ChatBot() {
                       : "bg-blue-600 text-white"
                   }`}
                 >
-                  <p className="text-sm">{message.text}</p>
+                  <p className="text-sm whitespace-pre-wrap">{renderMessageText(message.text)}</p>
                   <p
                     className={`text-xs mt-1 ${
                       message.isBot ? "text-gray-500" : "text-blue-100"
