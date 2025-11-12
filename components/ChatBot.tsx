@@ -33,81 +33,27 @@ export function ChatBot() {
     scrollToBottom();
   }, [messages]);
 
-  const getAIResponse = (userMessage: string): string => {
-    const lowerMessage = userMessage.toLowerCase();
+  const getAIResponse = async (userMessage: string): Promise<string> => {
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
 
-    // Greetings
-    if (lowerMessage.match(/\b(hello|hi|hey|good morning|good afternoon)\b/)) {
-      return "Hello! Welcome to LuxeStore! How can I assist you with your shopping today?";
+      const data = await response.json();
+
+      if (data.fallback) {
+        return data.fallback;
+      }
+
+      return data.reply || "I'm here to help! What would you like to know?";
+    } catch (error) {
+      console.error("Chat error:", error);
+      return "I'm having trouble connecting right now. Could you try asking again, or request a live agent?";
     }
-
-    // Thanks
-    if (lowerMessage.match(/\b(thank|thanks|thx)\b/)) {
-      return "You're welcome! Is there anything else I can help you with?";
-    }
-
-    // Shoes/Footwear
-    if (lowerMessage.match(/\b(shoe|shoes|sneaker|footwear|boot|sandal)\b/)) {
-      return "Yes! We have a great selection of premium footwear including running shoes, casual sneakers, and more. Check out our Shop page and filter by 'Footwear' category. Our running shoes are currently $159.99 with free shipping!";
-    }
-
-    // Electronics
-    if (lowerMessage.match(/\b(electronic|headphone|watch|speaker|camera|tech|gadget)\b/)) {
-      return "We offer premium electronics including wireless headphones, smartwatches, portable speakers, and professional cameras. Prices range from $149 to $1299. All electronics come with a 1-year warranty!";
-    }
-
-    // Accessories
-    if (lowerMessage.match(/\b(accessory|accessories|wallet|backpack|bag|sunglass)\b/)) {
-      return "Our accessories collection includes leather wallets ($79.99), designer backpacks ($129.99), and polarized sunglasses ($189.99). All made with premium materials!";
-    }
-
-    // Browse/Shop
-    if (lowerMessage.match(/\b(browse|shop|buy|purchase|look|see|show|find)\b/)) {
-      return "You can browse all our products by clicking 'Shop' in the menu. We have Electronics, Accessories, and Footwear. You can filter by category and sort by price or rating. Would you like help finding something specific?";
-    }
-
-    // Product inquiries
-    if (lowerMessage.match(/\b(product|item|sell|available|have|stock)\b/)) {
-      return "We have 8 premium products currently in stock across 3 categories: Electronics (headphones, watches, speakers, cameras), Accessories (wallets, backpacks, sunglasses), and Footwear (running shoes). What are you interested in?";
-    }
-
-    // Shipping
-    if (lowerMessage.match(/\b(ship|deliver|delivery|shipping|send)\b/)) {
-      return "We offer free shipping on orders over $100! Standard delivery takes 3-5 business days. Express shipping (1-2 days) is available at checkout for $15.";
-    }
-
-    // Returns
-    if (lowerMessage.match(/\b(return|refund|exchange|money back)\b/)) {
-      return "We have a 30-day return policy on all items. Products must be unused and in original packaging. Returns are free and you'll get a full refund within 5-7 business days!";
-    }
-
-    // Payment
-    if (lowerMessage.match(/\b(payment|pay|card|credit|paypal|apple pay)\b/)) {
-      return "We accept Visa, Mastercard, American Express, PayPal, Apple Pay, and Google Pay. All transactions are secured with 256-bit encryption for your safety!";
-    }
-
-    // Pricing/Discounts
-    if (lowerMessage.match(/\b(price|cost|expensive|cheap|discount|sale|deal|coupon)\b/)) {
-      return "Our products range from $79.99 to $1,299.99. We have regular sales - sign up for our newsletter to get 10% off your first order plus exclusive deals! Currently, all items have free shipping over $100.";
-    }
-
-    // Order tracking
-    if (lowerMessage.match(/\b(track|order|tracking|where|status)\b/)) {
-      return "You can track your order using the tracking number sent to your email after purchase. If you can't find it, I can connect you with a live agent who can look it up for you!";
-    }
-
-    // Complaints/Issues
-    if (lowerMessage.match(/\b(don'?t|dont|bad|terrible|awful|problem|issue|complaint|wrong|hate|dislike|ugly|not good)\b/)) {
-      return "I'm sorry to hear you're having an issue! I'd like to help resolve this right away. Could you tell me more about the problem? I can also connect you with a live agent for immediate assistance.";
-    }
-
-    // Quality questions
-    if (lowerMessage.match(/\b(quality|good|worth|recommend|review|rating)\b/)) {
-      return "All our products are premium quality with an average rating of 4.7/5 stars! We work directly with manufacturers to ensure the highest standards. Every product comes with our satisfaction guarantee!";
-    }
-
-    // Default response
-    return "I can help with product info, shipping, returns, payments, pricing, and more! Feel free to ask me anything, or request a live agent for personalized assistance. What would you like to know?";
   };
 
   const handleSendMessage = async () => {
@@ -124,17 +70,16 @@ export function ChatBot() {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate AI processing time
-    setTimeout(() => {
-      const botResponse: Message = {
-        id: messages.length + 2,
-        text: getAIResponse(inputValue),
-        isBot: true,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, botResponse]);
-      setIsTyping(false);
-    }, 1000);
+    // Get AI response
+    const aiReply = await getAIResponse(inputValue);
+    const botResponse: Message = {
+      id: messages.length + 2,
+      text: aiReply,
+      isBot: true,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, botResponse]);
+    setIsTyping(false);
   };
 
   const handleRequestAgent = () => {
