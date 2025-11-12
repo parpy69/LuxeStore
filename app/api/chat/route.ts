@@ -1,22 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
+import Groq from "groq-sdk";
+
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY || "",
+});
 
 export async function POST(request: NextRequest) {
   try {
     const { message } = await request.json();
 
-    // Try to use Ollama if available
-    try {
-      const response = await fetch("http://localhost:11434/api/generate", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          model: "llama2",
-          prompt: `You are a helpful customer service assistant for LuxeStore, a premium e-commerce website.
+    // Try to use Groq AI if API key is configured
+    if (process.env.GROQ_API_KEY) {
+      try {
+        const chatCompletion = await groq.chat.completions.create({
+          messages: [
+            {
+              role: "system",
+              content: `You are a helpful customer service assistant for LuxeStore, a premium e-commerce website.
 
 Store Information:
-- We sell Electronics (wireless headphones $299.99, smartwatches $399.99, portable speakers $149.99, cameras $1299.99)
+- We sell Electronics (wireless headphones $299.99, smartwatches $399.99, portable speakers $149.99, cameras $1,299.99)
 - Accessories (leather wallets $79.99, designer backpacks $129.99, sunglasses $189.99)
 - Footwear (running shoes $159.99)
 - Free shipping on orders over $100
@@ -28,24 +31,26 @@ Store Information:
 
 Guidelines:
 - Be professional, helpful, and concise (2-3 sentences max)
-- If you don't know something, suggest contacting a live agent
+- If you don't know something specific, suggest contacting a live agent
 - Stay focused on helping customers find products and answering store-related questions
 - For complaints, apologize professionally and offer to escalate to a live agent
+- Always try to redirect back to products and assistance`,
+            },
+            {
+              role: "user",
+              content: message,
+            },
+          ],
+          model: "llama3-8b-8192",
+          temperature: 0.7,
+          max_tokens: 150,
+        });
 
-Customer Question: ${message}
-
-Your Response:`,
-          stream: false,
-        }),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        return NextResponse.json({ reply: data.response });
+        const reply = chatCompletion.choices[0]?.message?.content || getFallbackResponse(message);
+        return NextResponse.json({ reply });
+      } catch (groqError) {
+        console.log("Groq API error, using fallback");
       }
-    } catch (ollamaError) {
-      // Ollama not available, fall back to smart responses
-      console.log("Ollama not available, using fallback");
     }
 
     // Fallback to smart hardcoded responses
