@@ -1,14 +1,27 @@
-# LuxeStore - Modern E-Commerce Platform
+# 🛍️ LuxeStore - Modern E-Commerce Platform
 
-A fully-featured, production-ready e-commerce website built with Next.js 15, TypeScript, and Tailwind CSS. Features a complete shopping experience with an intelligent AI chatbot, multiple pages, and responsive design.
+A **production-ready** e-commerce website built with **Next.js 15**, **TypeScript**, and **Tailwind CSS**. Features a complete shopping experience with **Groq AI-powered chatbot**, full cart functionality, and beautiful responsive design.
+
+> 🎯 **Perfect for portfolio**: Demonstrates modern web development, AI integration, full-stack capabilities, and production deployment.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15.0-black?style=flat-square&logo=next.js)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.3-blue?style=flat-square&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?style=flat-square&logo=tailwind-css)
+![AI Powered](https://img.shields.io/badge/AI-Groq_Llama_3.1-orange?style=flat-square)
 
 ## 🌐 Live Demo
 
-**[View Live Site](https://luxe-store-na2p.vercel.app)**
+**[View Live Site](https://luxe-store-lilac.vercel.app)**
+
+## 🚀 Key Highlights
+
+- 🤖 **AI-Powered Support** - Groq integration with Llama 3.1 for intelligent customer service
+- ⚡ **Latest Tech Stack** - Next.js 15, TypeScript, Tailwind CSS, React Context API
+- 🛒 **Full E-Commerce** - Complete shopping cart with add/remove/quantity management
+- 📱 **Fully Responsive** - Seamless experience across all devices
+- 🎨 **Modern UI/UX** - Professional design with smooth animations and gradients
+- 🔒 **Production Ready** - Deployed on Vercel with serverless functions
+- 💯 **100% Type Safe** - Full TypeScript implementation
 
 ## ✨ Features
 
@@ -32,10 +45,11 @@ A fully-featured, production-ready e-commerce website built with Next.js 15, Typ
 - 📞 **Contact** - Contact form with FAQs and business information
 
 ### AI Customer Support
-- 🤖 **Intelligent Chatbot** - Answers questions about products, shipping, returns, and more
-- 💬 **Live Agent Request** - Button to escalate to human support
-- 🎯 **Context-Aware** - Recognizes 15+ different question types
-- ⚡ **Instant Responses** - No API costs, completely free
+- 🤖 **Powered by Groq AI** - Real AI responses using Llama 3.1 (8B) model
+- 💬 **Live Agent Request** - Seamless escalation to human support
+- 🎯 **Context-Aware** - Understands products, policies, and customer needs
+- ⚡ **Lightning Fast** - Sub-second response times with Groq inference
+- 🆓 **Free Tier** - Production-ready AI at zero cost
 
 ### Design & UX
 - 📱 **Fully Responsive** - Optimized for mobile, tablet, and desktop
@@ -70,12 +84,25 @@ cd LuxeStore
 npm install
 ```
 
-3. Run the development server:
+3. Set up environment variables:
+
+Create a `.env.local` file in the root directory:
+```bash
+GROQ_API_KEY=your_groq_api_key_here
+```
+
+**Get your free Groq API key:**
+- Visit [https://console.groq.com](https://console.groq.com)
+- Sign up for a free account
+- Generate an API key
+- Paste it in your `.env.local` file
+
+4. Run the development server:
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser
+5. Open [http://localhost:3000](http://localhost:3000) in your browser
 
 ### Build for Production
 
@@ -89,6 +116,8 @@ npm start
 ```
 ├── app/                      # Next.js App Router pages
 │   ├── about/               # About page
+│   ├── api/                 # API routes
+│   │   └── chat/            # Groq AI chatbot endpoint
 │   ├── collections/         # Collections page
 │   ├── contact/             # Contact page with form
 │   ├── shop/                # Shop page with filters
@@ -96,7 +125,7 @@ npm start
 │   └── page.tsx             # Home page
 ├── components/              # React components
 │   ├── Cart.tsx             # Shopping cart drawer
-│   ├── ChatBot.tsx          # AI customer support
+│   ├── ChatBot.tsx          # AI customer support UI
 │   ├── Footer.tsx           # Site footer
 │   ├── Hero.tsx             # Hero section
 │   ├── Navbar.tsx           # Navigation bar
@@ -119,11 +148,15 @@ npm start
 - **[Tailwind CSS](https://tailwindcss.com/)** - Utility-first CSS framework
 - **[Lucide React](https://lucide.dev/)** - Modern icon library
 
+### AI & Backend
+- **[Groq AI](https://groq.com/)** - Lightning-fast LLM inference with Llama 3.1
+- **Next.js API Routes** - Serverless backend for chatbot integration
+
 ### State Management
 - **React Context API** - Global cart state management
 
 ### Deployment
-- **[Vercel](https://vercel.com/)** - Optimized for Next.js hosting
+- **[Vercel](https://vercel.com/)** - Optimized for Next.js hosting with edge functions
 
 ## 🎨 Features Breakdown
 
@@ -135,13 +168,14 @@ npm start
 - Slide-in drawer UI
 - Empty state handling
 
-### AI Chatbot
-- Answers product inquiries
-- Provides shipping information
-- Explains return policy
-- Handles complaints professionally
-- Suggests live agent when needed
-- 100% free (no API costs)
+### AI Chatbot (Groq-Powered)
+- **Real AI Intelligence** - Uses Llama 3.1 8B model via Groq API
+- **Natural Conversations** - Understands context and intent
+- **Store Knowledge** - Pre-trained with product catalog and policies
+- **Professional Responses** - Concise, helpful, business-focused answers
+- **Smart Fallbacks** - Local responses if API is unavailable
+- **Live Agent Escalation** - One-click transfer to human support
+- **100% Free** - Groq's generous free tier (no credit card required)
 
 ### Product Catalog
 - 8 premium products
@@ -158,12 +192,20 @@ npm start
 
 ## 📦 Deployment
 
-This project is deployed on **Vercel** and live at: [https://luxe-store-na2p.vercel.app](https://luxe-store-na2p.vercel.app)
+This project is deployed on **Vercel** and live at: **[https://luxe-store-lilac.vercel.app](https://luxe-store-lilac.vercel.app)**
 
-To deploy your own version:
-- Fork this repository
-- Import to [Vercel](https://vercel.com) or [Netlify](https://netlify.com)
-- Deploy with one click (auto-detects Next.js)
+### Deploy Your Own Version
+
+1. **Fork this repository** on GitHub
+2. **Sign up** at [Vercel](https://vercel.com) (free)
+3. **Import** your forked repository
+4. **Add Environment Variable:**
+   - Name: `GROQ_API_KEY`
+   - Value: Your Groq API key from [console.groq.com](https://console.groq.com)
+   - Environment: Production, Preview, Development
+5. **Deploy!** Vercel auto-detects Next.js and deploys in ~60 seconds
+
+**Note:** Without the Groq API key, the chatbot will use smart fallback responses (still functional, but not AI-powered).
 
 ## 🔧 Customization
 
@@ -202,9 +244,21 @@ theme: {
 }
 ```
 
-### Modify AI Responses
+### Customize AI Chatbot
 
-Edit the chatbot logic in `/components/ChatBot.tsx` to customize responses.
+**Update System Prompt** - Edit `/app/api/chat/route.ts` to customize AI behavior:
+```typescript
+content: `You are a helpful customer service assistant for LuxeStore...
+// Add your custom instructions here
+`
+```
+
+**Adjust Fallback Responses** - Edit `getFallbackResponse()` in `/app/api/chat/route.ts`
+
+**Change AI Model** - Switch to different Groq models:
+- `llama-3.1-8b-instant` (current, fast)
+- `mixtral-8x7b-32768` (longer context)
+- `gemma-7b-it` (lightweight)
 
 ## 📸 Screenshots
 
@@ -240,6 +294,7 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ## 🙏 Acknowledgments
 
+- **AI Powered by** [Groq](https://groq.com) - Lightning-fast LLM inference
 - Product images from [Unsplash](https://unsplash.com)
 - Icons from [Lucide](https://lucide.dev)
 - Built with [Next.js](https://nextjs.org)
@@ -248,4 +303,4 @@ This project is open source and available under the [MIT License](LICENSE).
 
 ⭐ Star this repo if you find it helpful!
 
-**Live Demo:** [https://luxe-store-na2p.vercel.app](https://luxe-store-na2p.vercel.app)
+**Live Demo:** [https://luxe-store-lilac.vercel.app](https://luxe-store-lilac.vercel.app)
