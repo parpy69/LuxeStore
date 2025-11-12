@@ -158,20 +158,12 @@ npm start
 
 ## 📦 Deployment
 
-### Deploy to Vercel (Recommended)
+This project is deployed on **Vercel** and live at: [https://luxe-store-na2p.vercel.app](https://luxe-store-na2p.vercel.app)
 
-1. Push your code to GitHub
-2. Import your repository on [Vercel](https://vercel.com)
-3. Vercel will auto-detect Next.js and deploy
-4. Your site will be live in ~2 minutes!
-
-### Deploy to Other Platforms
-
-This is a standard Next.js app and can be deployed to:
-- Netlify
-- Railway
-- Render
-- Any Node.js hosting provider
+To deploy your own version:
+- Fork this repository
+- Import to [Vercel](https://vercel.com) or [Netlify](https://netlify.com)
+- Deploy with one click (auto-detects Next.js)
 
 ## 🔧 Customization
 
