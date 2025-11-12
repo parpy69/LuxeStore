@@ -65,26 +65,26 @@ export default function ShopPage() {
           <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
             {/* Category Filter */}
             <div className="w-full lg:w-auto">
-              <div className="flex items-center gap-2 mb-3">
+              <div className="flex items-center gap-2 mb-4">
                 <Filter size={20} className="text-blue-600" />
-                <span className="text-gray-700 font-semibold">Filter by Category:</span>
+                <span className="text-gray-700 font-semibold text-base">Filter by Category:</span>
               </div>
-              <div className="flex items-center gap-2 flex-wrap">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {categories.map((category) => (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm cursor-pointer ${
+                    className={`px-4 py-3 rounded-lg font-medium transition-all shadow-sm cursor-pointer text-sm sm:text-base ${
                       selectedCategory === category
-                        ? "bg-blue-600 text-white shadow-md scale-105 ring-2 ring-blue-300"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow hover:scale-105 border-2 border-gray-200"
+                        ? "bg-blue-600 text-white shadow-md ring-2 ring-blue-300"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow border-2 border-gray-200 active:scale-95"
                     }`}
                   >
                     {category}
                   </button>
                 ))}
               </div>
-              <p className="text-xs text-gray-500 mt-2">👆 Click a category to filter products</p>
+              <p className="text-xs text-gray-500 mt-3 text-center sm:text-left">👆 Click a category to filter products</p>
             </div>
 
             {/* Sort Dropdown */}

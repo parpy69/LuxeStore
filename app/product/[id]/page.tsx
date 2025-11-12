@@ -2,9 +2,9 @@
 
 import { useParams, useRouter } from "next/navigation";
 import { products } from "@/data/products";
-import { ShoppingCart, Star, Package, Shield, Truck, ArrowLeft, Heart } from "lucide-react";
+import { ShoppingCart, Star, Package, Shield, Truck, ArrowLeft, Heart, X } from "lucide-react";
 import { useCart } from "@/context/CartContext";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 
 export default function ProductDetailPage() {
@@ -13,10 +13,47 @@ export default function ProductDetailPage() {
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
   const [addedToCart, setAddedToCart] = useState(false);
+  const [isFavorite, setIsFavorite] = useState(false);
+  const [isZoomed, setIsZoomed] = useState(false);
 
   const productId = parseInt(params.id as string);
   const product = products.find((p) => p.id === productId);
 
+  // Handlers and derived state
+  const handleAddToCart = () => {
+    if (!product) return;
+    for (let i = 0; i < quantity; i++) {
+      addToCart(product);
+    }
+    setAddedToCart(true);
+    setTimeout(() => setAddedToCart(false), 2000);
+  };
+
+  const handleFavoriteToggle = () => {
+    console.log("❤️ Heart clicked! Current state:", isFavorite);
+    setIsFavorite(!isFavorite);
+  };
+
+  const relatedProducts = product
+    ? products
+        .filter((p) => p.category === product.category && p.id !== product.id)
+        .slice(0, 4)
+    : [];
+
+  // Debug logging
+  useEffect(() => {
+    console.log("🖼️ Product page loaded for ID:", productId);
+  }, [productId]);
+
+  useEffect(() => {
+    console.log("🔍 isZoomed state changed:", isZoomed);
+  }, [isZoomed]);
+
+  useEffect(() => {
+    console.log("❤️ isFavorite state changed:", isFavorite);
+  }, [isFavorite]);
+
+  // Early return AFTER all hooks
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -33,18 +70,6 @@ export default function ProductDetailPage() {
       </div>
     );
   }
-
-  const handleAddToCart = () => {
-    for (let i = 0; i < quantity; i++) {
-      addToCart(product);
-    }
-    setAddedToCart(true);
-    setTimeout(() => setAddedToCart(false), 2000);
-  };
-
-  const relatedProducts = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -66,25 +91,59 @@ export default function ProductDetailPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-16">
           {/* Product Image */}
           <div className="relative">
-            <div className="aspect-square rounded-2xl overflow-hidden bg-white shadow-lg">
-              <img
-                src={product.image}
-                alt={product.name}
-                className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+            {/* Heart Button - Outside clickable area */}
+            <button 
+              onClick={handleFavoriteToggle}
+              className={`absolute top-4 right-4 p-3 rounded-full shadow-lg transition-all duration-300 z-30 ${
+                isFavorite 
+                  ? "bg-red-500 hover:bg-red-600 scale-110" 
+                  : "bg-white hover:bg-gray-100"
+              }`}
+              aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
+            >
+              <Heart 
+                size={24} 
+                className={`transition-all duration-300 ${
+                  isFavorite 
+                    ? "text-white fill-white" 
+                    : "text-gray-600"
+                }`}
               />
-            </div>
-            <div className="absolute top-4 right-4 flex flex-col gap-2">
-              <button className="bg-white p-3 rounded-full shadow-lg hover:bg-gray-100 transition-colors">
-                <Heart size={24} className="text-gray-600" />
-              </button>
-            </div>
+            </button>
+
+            {/* Low Stock Badge */}
             {product.stock < 10 && (
-              <div className="absolute top-4 left-4">
+              <div className="absolute top-4 left-4 z-30">
                 <span className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                   Only {product.stock} left!
                 </span>
               </div>
             )}
+
+            {/* Clickable Image for Zoom */}
+            <div 
+              className="aspect-square rounded-2xl overflow-hidden bg-white shadow-lg cursor-zoom-in group"
+              onClick={() => {
+                console.log("Image clicked - opening zoom");
+                setIsZoomed(true);
+              }}
+            >
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center pointer-events-none">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white rounded-full p-3 shadow-lg">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-blue-600">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                    <line x1="11" y1="8" x2="11" y2="14"></line>
+                    <line x1="8" y1="11" x2="14" y2="11"></line>
+                  </svg>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Product Info */}
@@ -301,6 +360,40 @@ export default function ProductDetailPage() {
           </div>
         )}
       </div>
+
+      {/* Image Zoom Modal */}
+      {isZoomed && (
+        <div 
+          className="fixed inset-0 bg-black bg-opacity-95 z-50 flex items-center justify-center p-4 animate-fadeIn"
+          onClick={() => {
+            console.log("Closing zoom");
+            setIsZoomed(false);
+          }}
+        >
+          <button
+            onClick={() => setIsZoomed(false)}
+            className="absolute top-4 right-4 bg-white hover:bg-gray-100 text-gray-800 p-3 rounded-full shadow-lg transition-colors z-10"
+            aria-label="Close zoom"
+          >
+            <X size={24} />
+          </button>
+          
+          <div className="relative max-w-6xl max-h-[90vh] w-full h-full flex items-center justify-center">
+            <img
+              src={product.image}
+              alt={product.name}
+              className="max-w-full max-h-full object-contain rounded-lg shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            />
+          </div>
+
+          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 bg-white bg-opacity-90 px-6 py-3 rounded-full shadow-lg">
+            <p className="text-gray-800 font-semibold text-center">
+              Click anywhere to close
+            </p>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
