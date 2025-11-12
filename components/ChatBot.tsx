@@ -33,27 +33,104 @@ export function ChatBot() {
     scrollToBottom();
   }, [messages]);
 
-  const getAIResponse = async (userMessage: string): Promise<string> => {
-    try {
-      const response = await fetch("/api/chat", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ message: userMessage }),
-      });
+  const getAIResponse = (userMessage: string): string => {
+    const msg = userMessage.toLowerCase();
 
-      const data = await response.json();
-
-      if (data.fallback) {
-        return data.fallback;
-      }
-
-      return data.reply || "I'm here to help! What would you like to know?";
-    } catch (error) {
-      console.error("Chat error:", error);
-      return "I'm having trouble connecting right now. Could you try asking again, or request a live agent?";
+    // Greetings
+    if (msg.match(/^(hi|hello|hey|good morning|good afternoon|good evening|sup|yo)$/)) {
+      return "Hi there! 👋 Welcome to LuxeStore! How can I help you today?";
     }
+
+    // Thanks
+    if (msg.match(/(thank|thanks|thx|appreciate)/)) {
+      return "You're very welcome! Anything else I can help with? 😊";
+    }
+
+    // Website complaints - MORE SPECIFIC MATCHING
+    if (msg.includes("website") || msg.includes("site") || msg.includes("store") || msg.includes("page")) {
+      if (msg.match(/(don'?t like|hate|ugly|bad|terrible|not good|dislike)/)) {
+        return "I'm sorry you feel that way! 😔 We value your feedback. Could you tell me what specifically you'd like to see improved? I can also connect you with our team via the live agent button.";
+      }
+      if (msg.match(/(look|design|layout|appearance)/)) {
+        return "Thanks for your feedback on our design! We're always working to improve. What would you like to see different? Feel free to request a live agent if you'd like to discuss this further!";
+      }
+    }
+
+    // General complaints
+    if (msg.match(/(problem|issue|complaint|not working|broken|error)/)) {
+      return "I'm sorry to hear that! 😟 Let me help you fix this. Can you tell me more about what's happening? Or click 'Request Live Agent' for immediate assistance.";
+    }
+
+    // Shoes/Footwear
+    if (msg.match(/(shoe|footwear|sneaker|boot|sandal|trainer)/)) {
+      if (msg.match(/(have|sell|got|any|do you)/)) {
+        return "Yes! We have premium running shoes for $159.99 with advanced cushioning. Check out our Shop page and filter by 'Footwear'. Free shipping on orders over $100! 👟";
+      }
+      return "Our footwear collection includes high-performance running shoes ($159.99). They have a 4.7 star rating and 42 in stock! Want to check them out?";
+    }
+
+    // Electronics
+    if (msg.match(/(headphone|earbud|watch|smartwatch|speaker|camera|electronic|tech|gadget)/)) {
+      return "We have amazing electronics! 🎧 Wireless headphones ($299), smartwatches ($399), portable speakers ($149), and pro cameras ($1299). All with 1-year warranty. What interests you?";
+    }
+
+    // Accessories
+    if (msg.match(/(wallet|backpack|bag|sunglass|accessory|accessories)/)) {
+      return "Our accessories are top quality! 💼 Leather wallets ($79.99), designer backpacks ($129.99), and polarized sunglasses ($189.99). All made with premium materials!";
+    }
+
+    // Price questions
+    if (msg.match(/(how much|price|cost|expensive|cheap)/)) {
+      return "Our products range from $79.99 (wallets) to $1,299.99 (cameras). Free shipping over $100! We also have sales - sign up for our newsletter for 10% off your first order! 💰";
+    }
+
+    // Shipping
+    if (msg.match(/(ship|deliver|delivery|shipping|send)/)) {
+      return "Free shipping on orders over $100! 📦 Standard delivery is 3-5 business days. Express (1-2 days) available for $15. We ship nationwide!";
+    }
+
+    // Returns
+    if (msg.match(/(return|refund|exchange|money back|send back)/)) {
+      return "Easy 30-day returns! ✅ Products must be unused in original packaging. Returns are FREE and you get a full refund in 5-7 business days. No hassle!";
+    }
+
+    // Payment
+    if (msg.match(/(payment|pay|card|visa|mastercard|paypal|apple pay)/)) {
+      return "We accept all major credit cards, PayPal, Apple Pay, and Google Pay! 💳 All transactions are secured with 256-bit encryption. Shop with confidence!";
+    }
+
+    // Discounts/Sales
+    if (msg.match(/(discount|sale|deal|coupon|promo|offer)/)) {
+      return "Sign up for our newsletter for 10% off your first order! 🎉 We also run regular sales. Right now: Free shipping on all orders over $100!";
+    }
+
+    // Quality questions
+    if (msg.match(/(quality|good|worth|recommend|review|rating)/)) {
+      return "All our products are premium quality! ⭐ Average 4.7/5 star rating from 10,000+ happy customers. We work directly with manufacturers for the best quality. 100% satisfaction guaranteed!";
+    }
+
+    // In stock questions
+    if (msg.match(/(in stock|available|stock|inventory)/)) {
+      return "We have 8 premium products in stock right now across Electronics, Accessories, and Footwear. All items ready to ship! Which category interests you?";
+    }
+
+    // Browsing/Shopping
+    if (msg.match(/(browse|shop|buy|purchase|see|show|looking for|want to)/)) {
+      return "Click 'Shop' in the menu to browse everything! 🛍️ You can filter by category (Electronics, Accessories, Footwear) and sort by price or rating. Need help finding something specific?";
+    }
+
+    // What do you sell
+    if (msg.match(/(what|which|tell me).*(sell|have|offer|product)/)) {
+      return "We sell premium Electronics (headphones, watches, speakers, cameras), Accessories (wallets, backpacks, sunglasses), and Footwear (running shoes). What are you interested in? 😊";
+    }
+
+    // Contact/Agent
+    if (msg.match(/(agent|human|person|talk to someone|contact|help|support)/)) {
+      return "I'm here to help! For personalized assistance, just click the 'Request Live Agent' button below and a team member will be with you in 2-3 minutes! 👤";
+    }
+
+    // Default - more helpful
+    return "I'm here to help! You can ask me about:\n• Products & Pricing 💰\n• Shipping & Delivery 📦\n• Returns & Refunds ✅\n• Payment Options 💳\n\nOr request a live agent anytime!";
   };
 
   const handleSendMessage = async () => {
@@ -70,16 +147,17 @@ export function ChatBot() {
     setInputValue("");
     setIsTyping(true);
 
-    // Get AI response
-    const aiReply = await getAIResponse(inputValue);
-    const botResponse: Message = {
-      id: messages.length + 2,
-      text: aiReply,
-      isBot: true,
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, botResponse]);
-    setIsTyping(false);
+    // Simulate typing delay
+    setTimeout(() => {
+      const botResponse: Message = {
+        id: messages.length + 2,
+        text: getAIResponse(inputValue),
+        isBot: true,
+        timestamp: new Date(),
+      };
+      setMessages((prev) => [...prev, botResponse]);
+      setIsTyping(false);
+    }, 800);
   };
 
   const handleRequestAgent = () => {
