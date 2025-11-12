@@ -61,45 +61,55 @@ export default function ShopPage() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {/* Filters and Sort */}
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
-          {/* Category Filter */}
-          <div className="flex items-center gap-2 flex-wrap">
-            <Filter size={20} className="text-gray-600" />
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-lg font-medium transition-colors ${
-                  selectedCategory === category
-                    ? "bg-blue-600 text-white"
-                    : "bg-white text-gray-700 hover:bg-gray-100"
-                }`}
+        <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+          <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6">
+            {/* Category Filter */}
+            <div className="w-full lg:w-auto">
+              <div className="flex items-center gap-2 mb-3">
+                <Filter size={20} className="text-blue-600" />
+                <span className="text-gray-700 font-semibold">Filter by Category</span>
+              </div>
+              <div className="flex items-center gap-2 flex-wrap">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm ${
+                      selectedCategory === category
+                        ? "bg-blue-600 text-white shadow-md scale-105"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow"
+                    }`}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Sort Dropdown */}
+            <div className="w-full lg:w-auto">
+              <label className="text-gray-700 font-semibold mb-2 block">Sort by:</label>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full lg:w-auto px-4 py-2.5 bg-gray-100 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 cursor-pointer"
               >
-                {category}
-              </button>
-            ))}
+                <option value="featured">Featured</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="rating">Highest Rated</option>
+              </select>
+            </div>
           </div>
 
-          {/* Sort Dropdown */}
-          <div className="flex items-center gap-2">
-            <label className="text-gray-700 font-medium">Sort by:</label>
-            <select
-              value={sortBy}
-              onChange={(e) => setSortBy(e.target.value)}
-              className="px-4 py-2 bg-white border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="featured">Featured</option>
-              <option value="price-low">Price: Low to High</option>
-              <option value="price-high">Price: High to Low</option>
-              <option value="rating">Highest Rated</option>
-            </select>
+          {/* Products Count */}
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <p className="text-gray-600 font-medium">
+              Showing <span className="text-blue-600 font-bold">{filteredProducts.length}</span> product{filteredProducts.length !== 1 ? "s" : ""}
+              {selectedCategory !== "All" && <span> in <span className="text-blue-600 font-bold">{selectedCategory}</span></span>}
+            </p>
           </div>
         </div>
-
-        {/* Products Count */}
-        <p className="text-gray-600 mb-6">
-          Showing {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""}
-        </p>
 
         {/* Products Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
