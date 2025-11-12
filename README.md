@@ -236,7 +236,7 @@ This project is open source and available under the [MIT License](LICENSE).
 **Abdullah Khudeish**
 
 - GitHub: [@Parpy69](https://github.com/Parpy69)
-- Portfolio: [LuxeStore](https://github.com/parpy69?tab=repositories)
+- Project Repository: [LuxeStore](https://github.com/parpy69?tab=repositories)
 
 ## 🙏 Acknowledgments
 
