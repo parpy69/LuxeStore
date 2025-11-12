@@ -30,24 +30,24 @@ Store Information & Product Links:
 ELECTRONICS:
 1. Wireless Headphones - $299.99
    Link: https://luxe-store-lilac.vercel.app/product/1
-2. Smartwatch - $399.99
+2. Smart Watch Pro - $399.99
    Link: https://luxe-store-lilac.vercel.app/product/2
-3. Portable Speaker - $149.99
+7. Portable Speaker - $149.99
+   Link: https://luxe-store-lilac.vercel.app/product/7
+8. Premium Camera - $1,299.99
+   Link: https://luxe-store-lilac.vercel.app/product/8
+
+ACCESSORIES:
+3. Designer Backpack - $129.99
    Link: https://luxe-store-lilac.vercel.app/product/3
-4. Professional Camera - $1,299.99
+4. Leather Wallet - $79.99
    Link: https://luxe-store-lilac.vercel.app/product/4
+6. Sunglasses - $189.99
+   Link: https://luxe-store-lilac.vercel.app/product/6
 
 FOOTWEAR:
 5. Running Shoes - $159.99
    Link: https://luxe-store-lilac.vercel.app/product/5
-
-ACCESSORIES:
-6. Designer Backpack - $129.99
-   Link: https://luxe-store-lilac.vercel.app/product/6
-7. Leather Wallet - $79.99
-   Link: https://luxe-store-lilac.vercel.app/product/7
-8. Sunglasses - $189.99
-   Link: https://luxe-store-lilac.vercel.app/product/8
 
 Other Pages:
 - Shop All: https://luxe-store-lilac.vercel.app/shop
@@ -109,28 +109,28 @@ function getFallbackResponse(message: string): string {
     return "Our Smartwatch is available for $399.99: https://luxe-store-lilac.vercel.app/product/2. Includes fitness tracking and heart rate monitoring!";
   }
 
-  if (msg.match(/\b(speaker|bluetooth speaker)\b/)) {
-    return "View our Portable Speaker for $149.99: https://luxe-store-lilac.vercel.app/product/3. 360° sound with 20-hour battery life!";
+  if (msg.match(/\b(backpack|bag)\b/)) {
+    return "Check out our Designer Backpack for $129.99: https://luxe-store-lilac.vercel.app/product/3. Durable and stylish with laptop compartment!";
   }
 
-  if (msg.match(/\b(camera|photography)\b/)) {
-    return "Our Professional Camera is $1,299.99: https://luxe-store-lilac.vercel.app/product/4. 4K video and professional-grade features!";
+  if (msg.match(/\b(wallet)\b/)) {
+    return "Our Leather Wallet is $79.99: https://luxe-store-lilac.vercel.app/product/4. Genuine leather with RFID protection!";
   }
 
   if (msg.match(/\b(shoe|footwear|sneaker|running)\b/)) {
     return "Our Running Shoes are $159.99: https://luxe-store-lilac.vercel.app/product/5. Advanced cushioning technology and breathable design!";
   }
 
-  if (msg.match(/\b(backpack|bag)\b/)) {
-    return "Check out our Designer Backpack for $129.99: https://luxe-store-lilac.vercel.app/product/6. Durable and stylish with laptop compartment!";
-  }
-
-  if (msg.match(/\b(wallet)\b/)) {
-    return "Our Leather Wallet is $79.99: https://luxe-store-lilac.vercel.app/product/7. Genuine leather with RFID protection!";
-  }
-
   if (msg.match(/\b(sunglass|shades)\b/)) {
-    return "View our Sunglasses for $189.99: https://luxe-store-lilac.vercel.app/product/8. UV400 protection with polarized lenses!";
+    return "View our Sunglasses for $189.99: https://luxe-store-lilac.vercel.app/product/6. UV400 protection with polarized lenses!";
+  }
+
+  if (msg.match(/\b(speaker|bluetooth speaker)\b/)) {
+    return "View our Portable Speaker for $149.99: https://luxe-store-lilac.vercel.app/product/7. 360° sound with 20-hour battery life!";
+  }
+
+  if (msg.match(/\b(camera|photography)\b/)) {
+    return "Our Premium Camera is $1,299.99: https://luxe-store-lilac.vercel.app/product/8. 4K video and professional-grade features!";
   }
 
   // General requests

@@ -130,28 +130,28 @@ export function ChatBot() {
       return "Our Smartwatch is available for $399.99: https://luxe-store-lilac.vercel.app/product/2\n\nIncludes fitness tracking and heart rate monitoring!";
     }
 
-    if (msg.match(/(speaker|bluetooth)/)) {
-      return "View our Portable Speaker for $149.99: https://luxe-store-lilac.vercel.app/product/3\n\n360° sound with 20-hour battery life!";
+    if (msg.match(/(backpack|bag)/)) {
+      return "Check out our Designer Backpack for $129.99: https://luxe-store-lilac.vercel.app/product/3\n\nDurable and stylish with laptop compartment!";
     }
 
-    if (msg.match(/(camera|photography)/)) {
-      return "Our Professional Camera is $1,299.99: https://luxe-store-lilac.vercel.app/product/4\n\n4K video and professional-grade features!";
+    if (msg.match(/(wallet)/)) {
+      return "Our Leather Wallet is $79.99: https://luxe-store-lilac.vercel.app/product/4\n\nGenuine leather with RFID protection!";
     }
 
     if (msg.match(/(shoe|footwear|sneaker|running|trainer)/)) {
       return "Our Running Shoes are $159.99: https://luxe-store-lilac.vercel.app/product/5\n\nAdvanced cushioning technology and breathable design!";
     }
 
-    if (msg.match(/(backpack|bag)/)) {
-      return "Check out our Designer Backpack for $129.99: https://luxe-store-lilac.vercel.app/product/6\n\nDurable and stylish with laptop compartment!";
-    }
-
-    if (msg.match(/(wallet)/)) {
-      return "Our Leather Wallet is $79.99: https://luxe-store-lilac.vercel.app/product/7\n\nGenuine leather with RFID protection!";
-    }
-
     if (msg.match(/(sunglass|shades)/)) {
-      return "View our Sunglasses for $189.99: https://luxe-store-lilac.vercel.app/product/8\n\nUV400 protection with polarized lenses!";
+      return "View our Sunglasses for $189.99: https://luxe-store-lilac.vercel.app/product/6\n\nUV400 protection with polarized lenses!";
+    }
+
+    if (msg.match(/(speaker|bluetooth)/)) {
+      return "View our Portable Speaker for $149.99: https://luxe-store-lilac.vercel.app/product/7\n\n360° sound with 20-hour battery life!";
+    }
+
+    if (msg.match(/(camera|photography)/)) {
+      return "Our Premium Camera is $1,299.99: https://luxe-store-lilac.vercel.app/product/8\n\n4K video and professional-grade features!";
     }
 
     // General link requests
