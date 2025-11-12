@@ -97,7 +97,7 @@ export function ChatBot() {
     }
 
     // Complaints/Issues
-    if (lowerMessage.match(/\b(don't like|bad|terrible|awful|problem|issue|complaint|wrong)\b/)) {
+    if (lowerMessage.match(/\b(don'?t|dont|bad|terrible|awful|problem|issue|complaint|wrong|hate|dislike|ugly|not good)\b/)) {
       return "I'm sorry to hear you're having an issue! I'd like to help resolve this right away. Could you tell me more about the problem? I can also connect you with a live agent for immediate assistance.";
     }
 
