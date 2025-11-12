@@ -15,11 +15,13 @@ A **production-ready** e-commerce website built with **Next.js 15**, **TypeScrip
 
 ## 🚀 Key Highlights
 
-- 🤖 **AI-Powered Support** - Groq integration with Llama 3.1 for intelligent customer service
+- 🤖 **AI-Powered Support** - Groq integration with Llama 3.1 providing direct product links
+- 🔗 **Smart Product Links** - AI can send clickable URLs to specific products
+- 📄 **Product Detail Pages** - Full pages for each product with reviews, specs, and related items
 - ⚡ **Latest Tech Stack** - Next.js 15, TypeScript, Tailwind CSS, React Context API
 - 🛒 **Full E-Commerce** - Complete shopping cart with add/remove/quantity management
 - 📱 **Fully Responsive** - Seamless experience across all devices
-- 🎨 **Modern UI/UX** - Professional design with smooth animations and gradients
+- 🎨 **Modern UI/UX** - Professional design with smooth animations, gradients, and custom branding
 - 🔒 **Production Ready** - Deployed on Vercel with serverless functions
 - 💯 **100% Type Safe** - Full TypeScript implementation
 
@@ -33,36 +35,48 @@ A **production-ready** e-commerce website built with **Next.js 15**, **TypeScrip
 
 ### Product Management
 - 🏷️ **8 Premium Products** - Across Electronics, Accessories, and Footwear categories
-- 🔍 **Advanced Filtering** - Filter by category and sort by price, rating, or featured
-- ⭐ **Product Ratings** - Display ratings and stock levels
-- 📊 **Real-time Stock Tracking** - Shows current inventory levels
+- 📄 **Detailed Product Pages** - Individual pages with full specs, customer reviews, and related products
+- 🔍 **Advanced Filtering** - Enhanced filter UI with category buttons and sort options
+- ⭐ **Product Ratings** - Display ratings and stock levels with visual indicators
+- 📊 **Real-time Stock Tracking** - Shows current inventory levels with low stock warnings
+- 🖼️ **Product Images** - High-quality images with hover effects and zoom
 
 ### Pages & Navigation
 - 🏠 **Home** - Hero section with featured products and benefits
-- 🛍️ **Shop** - Full product catalog with filtering and sorting
+- 🛍️ **Shop** - Full product catalog with enhanced filtering and sorting UI
+- 📄 **Product Details** - Individual product pages (`/product/[id]`) with reviews and recommendations
 - 📚 **Collections** - Curated product collections by category
 - ℹ️ **About** - Company story, team, and values
 - 📞 **Contact** - Contact form with FAQs and business information
+- 🎨 **Custom Branding** - Blue/purple gradient L logo favicon
 
 ### AI Customer Support
 - 🤖 **Powered by Groq AI** - Real AI responses using Llama 3.1 (8B) model
+- 🔗 **Direct Product Links** - AI provides clickable URLs to specific products (`/product/1`, `/product/2`, etc.)
+- 💙 **Styled Links** - Blue, underlined, clickable links that open product detail pages
 - 💬 **Live Agent Request** - Seamless escalation to human support
-- 🎯 **Context-Aware** - Understands products, policies, and customer needs
+- 🎯 **Context-Aware** - Knows all 8 products with accurate pricing and descriptions
 - ⚡ **Lightning Fast** - Sub-second response times with Groq inference
+- 🔄 **Smart Fallbacks** - Local responses if Groq API is unavailable
 - 🆓 **Free Tier** - Production-ready AI at zero cost
 
 ### Design & UX
 - 📱 **Fully Responsive** - Optimized for mobile, tablet, and desktop
-- 🎨 **Modern UI** - Clean gradient design with smooth animations
+- 🎨 **Modern UI** - Clean gradient design with smooth animations and hover effects
+- 🎯 **Enhanced Visuals** - Decorative elements, geometric shapes, and badge labels on headers
+- 👁️ **Hover Effects** - Eye icon on product cards, image zoom, color transitions
 - ♿ **Accessible** - WCAG compliant with proper ARIA labels
 - 🌙 **Professional Theme** - Blue and purple gradient color scheme
+- 🎨 **Custom Logo** - SVG favicon with gradient L branding
 
 ### Technical Features
-- ⚡ **Fast Performance** - Built with Next.js 15 App Router
-- 🔒 **Type Safety** - Full TypeScript implementation
+- ⚡ **Fast Performance** - Built with Next.js 15 App Router with dynamic routes
+- 🔒 **Type Safety** - Full TypeScript implementation with strict mode
 - 🎯 **State Management** - React Context API for cart state
 - 🖼️ **Optimized Images** - Next.js Image component with lazy loading
+- 🔗 **Dynamic Routes** - `/product/[id]` for individual product pages
 - 📦 **Clean Architecture** - Component-based, maintainable structure
+- 🔄 **Smart Link Parsing** - Automatic URL detection and rendering in chatbot
 
 ## 🚀 Getting Started
 
@@ -120,24 +134,29 @@ npm start
 │   │   └── chat/            # Groq AI chatbot endpoint
 │   ├── collections/         # Collections page
 │   ├── contact/             # Contact page with form
+│   ├── product/             # Product detail pages
+│   │   └── [id]/            # Dynamic product routes
+│   │       └── page.tsx     # Individual product page
 │   ├── shop/                # Shop page with filters
-│   ├── layout.tsx           # Root layout
+│   ├── icon.svg             # Custom L logo favicon
+│   ├── layout.tsx           # Root layout with metadata
 │   └── page.tsx             # Home page
 ├── components/              # React components
 │   ├── Cart.tsx             # Shopping cart drawer
-│   ├── ChatBot.tsx          # AI customer support UI
+│   ├── ChatBot.tsx          # AI support with clickable links
 │   ├── Footer.tsx           # Site footer
 │   ├── Hero.tsx             # Hero section
 │   ├── Navbar.tsx           # Navigation bar
-│   ├── ProductCard.tsx      # Product card component
+│   ├── ProductCard.tsx      # Product card with click handler
 │   └── ProductGrid.tsx      # Product grid layout
 ├── context/                 # React Context
 │   └── CartContext.tsx      # Shopping cart state
 ├── data/                    # Mock data
-│   └── products.ts          # Product inventory
+│   └── products.ts          # Product inventory (8 products)
 ├── types/                   # TypeScript types
 │   └── product.ts           # Product & cart types
 └── public/                  # Static assets
+    └── robots.txt           # SEO configuration
 ```
 
 ## 🛠️ Tech Stack
@@ -170,19 +189,34 @@ npm start
 
 ### AI Chatbot (Groq-Powered)
 - **Real AI Intelligence** - Uses Llama 3.1 8B model via Groq API
+- **Direct Product Links** - Provides clickable URLs to specific product pages
+- **Smart Link Rendering** - Automatically detects and styles URLs as blue clickable links
 - **Natural Conversations** - Understands context and intent
-- **Store Knowledge** - Pre-trained with product catalog and policies
+- **Store Knowledge** - Pre-trained with all 8 products and their exact URLs
 - **Professional Responses** - Concise, helpful, business-focused answers
 - **Smart Fallbacks** - Local responses if API is unavailable
 - **Live Agent Escalation** - One-click transfer to human support
 - **100% Free** - Groq's generous free tier (no credit card required)
 
 ### Product Catalog
-- 8 premium products
+- 8 premium products with individual detail pages
 - Categories: Electronics, Accessories, Footwear
 - Price range: $79.99 - $1,299.99
 - Real product data with ratings and stock
-- High-quality product images
+- High-quality product images with zoom effects
+
+### Product Detail Pages
+Each product has a dedicated page (`/product/[id]`) featuring:
+- **Large Product Images** - Full-size photos with hover effects
+- **Complete Product Info** - Name, price, description, category, ratings
+- **Customer Reviews** - 4 sample reviews with star ratings
+- **Quantity Selector** - Increment/decrement buttons with stock limits
+- **Add to Cart** - Direct add functionality with visual feedback
+- **Stock Indicators** - "Only X left!" badges for low stock items
+- **Trust Badges** - Free shipping, 1-year warranty, easy returns
+- **Related Products** - 4 similar items from the same category
+- **Back Navigation** - Easy return to previous page
+- **Save Discount Badge** - Shows 30% savings from original price
 
 ### Responsive Design
 - Mobile-first approach
@@ -260,19 +294,50 @@ content: `You are a helpful customer service assistant for LuxeStore...
 - `mixtral-8x7b-32768` (longer context)
 - `gemma-7b-it` (lightweight)
 
+## 💬 AI Chatbot Examples
+
+Ask the AI for product links:
+
+```
+User: "Show me headphones"
+AI: "Check out our Wireless Headphones for $299.99: 
+     https://luxe-store-lilac.vercel.app/product/1
+     Premium sound quality with noise cancellation!"
+```
+
+```
+User: "Give me a link to designer backpack"
+AI: "Check out our Designer Backpack for $129.99: 
+     https://luxe-store-lilac.vercel.app/product/3
+     Durable and stylish with laptop compartment!"
+```
+
+The AI knows all 8 products and can provide direct clickable links to:
+- Product 1: Wireless Headphones
+- Product 2: Smart Watch Pro
+- Product 3: Designer Backpack
+- Product 4: Leather Wallet
+- Product 5: Running Shoes
+- Product 6: Sunglasses
+- Product 7: Portable Speaker
+- Product 8: Premium Camera
+
 ## 📸 Screenshots
 
 ### Home Page
 Modern hero section with featured products and benefits.
 
 ### Shop Page
-Full product catalog with filtering and sorting capabilities.
+Full product catalog with enhanced filtering UI and sorting capabilities.
+
+### Product Detail Pages
+Individual pages for each product with full specifications, customer reviews, and related products.
 
 ### Shopping Cart
-Slide-in cart drawer with product management.
+Slide-in cart drawer with product management and real-time totals.
 
 ### AI Chatbot
-Intelligent customer support assistant.
+Intelligent customer support assistant with clickable blue product links.
 
 ## 🤝 Contributing
 
