@@ -359,20 +359,6 @@ Slide-in cart drawer with product management and real-time totals.
 ### AI Chatbot
 Intelligent customer support assistant with clickable blue product links.
 
-## 📚 Learning Guide
-
-**New to coding?** Check out our [LEARNING.md](LEARNING.md) guide!
-
-This beginner-friendly guide explains:
-- 📂 How the project is structured
-- 🧩 What each file does
-- 💡 Key concepts explained simply (React, TypeScript, Next.js)
-- 🎯 Step-by-step learning path
-- 🔍 Important code patterns
-- 💻 How to make your first changes
-
-Perfect for understanding how your e-commerce site works!
-
 ## 🤝 Contributing
 
 Contributions are welcome! Feel free to:
