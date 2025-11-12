@@ -33,7 +33,30 @@ export function ChatBot() {
     scrollToBottom();
   }, [messages]);
 
-  const getAIResponse = (userMessage: string): string => {
+  const getAIResponse = async (userMessage: string): Promise<string> => {
+    // Try to use Ollama API first
+    try {
+      const response = await fetch("/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: userMessage }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        return data.reply;
+      }
+    } catch (error) {
+      console.error("API error, using fallback");
+    }
+
+    // Fallback to local logic
+    return getLocalResponse(userMessage);
+  };
+
+  const getLocalResponse = (userMessage: string): string => {
     const msg = userMessage.toLowerCase();
 
     // Greetings
@@ -152,17 +175,16 @@ export function ChatBot() {
     setInputValue("");
     setIsTyping(true);
 
-    // Simulate typing delay
-    setTimeout(() => {
-      const botResponse: Message = {
-        id: messages.length + 2,
-        text: getAIResponse(inputValue),
-        isBot: true,
-        timestamp: new Date(),
-      };
-      setMessages((prev) => [...prev, botResponse]);
-      setIsTyping(false);
-    }, 800);
+    // Get AI response
+    const reply = await getAIResponse(inputValue);
+    const botResponse: Message = {
+      id: messages.length + 2,
+      text: reply,
+      isBot: true,
+      timestamp: new Date(),
+    };
+    setMessages((prev) => [...prev, botResponse]);
+    setIsTyping(false);
   };
 
   const handleRequestAgent = () => {
