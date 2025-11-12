@@ -1,8 +1,9 @@
 "use client";
 
 import { Product } from "@/types/product";
-import { Star, ShoppingCart } from "lucide-react";
+import { Star, ShoppingCart, Eye } from "lucide-react";
 import { useCart } from "@/context/CartContext";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
 
 interface ProductCardProps {
@@ -11,13 +12,22 @@ interface ProductCardProps {
 
 export function ProductCard({ product }: ProductCardProps) {
   const { addToCart } = useCart();
+  const router = useRouter();
 
-  const handleAddToCart = () => {
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.stopPropagation();
     addToCart(product);
   };
 
+  const handleViewDetails = () => {
+    router.push(`/product/${product.id}`);
+  };
+
   return (
-    <div className="bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-xl transition-shadow duration-300">
+    <div 
+      onClick={handleViewDetails}
+      className="bg-white rounded-xl shadow-md overflow-hidden group hover:shadow-xl transition-all duration-300 cursor-pointer"
+    >
       <div className="relative aspect-square overflow-hidden">
         <Image
           src={product.image}
@@ -30,6 +40,11 @@ export function ProductCard({ product }: ProductCardProps) {
             Low Stock
           </span>
         )}
+        <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition-all duration-300 flex items-center justify-center">
+          <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-white rounded-full p-3 shadow-lg">
+            <Eye size={24} className="text-blue-600" />
+          </div>
+        </div>
       </div>
 
       <div className="p-5">
@@ -38,7 +53,7 @@ export function ProductCard({ product }: ProductCardProps) {
             <p className="text-xs text-gray-500 uppercase tracking-wide mb-1">
               {product.category}
             </p>
-            <h3 className="text-lg font-semibold text-gray-900 line-clamp-1">
+            <h3 className="text-lg font-semibold text-gray-900 line-clamp-1 group-hover:text-blue-600 transition-colors">
               {product.name}
             </h3>
           </div>
@@ -61,13 +76,13 @@ export function ProductCard({ product }: ProductCardProps) {
           </span>
         </div>
 
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-2">
           <p className="text-2xl font-bold text-gray-900">
             ${product.price.toFixed(2)}
           </p>
           <button
             onClick={handleAddToCart}
-            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors font-medium"
+            className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors font-medium shadow-sm hover:shadow-md"
           >
             <ShoppingCart size={18} />
             Add

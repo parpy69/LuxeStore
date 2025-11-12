@@ -97,32 +97,47 @@ export function ChatBot() {
       return "I apologize for the inconvenience. I'm here to help resolve this. Could you provide more details about the issue? Alternatively, click 'Request Live Agent' for immediate assistance.";
     }
 
-    // Link requests
+    // Specific product requests
+    if (msg.match(/(headphone|earphone|earbud|audio)/)) {
+      return "Check out our Wireless Headphones for $299.99: https://luxe-store-lilac.vercel.app/product/1\n\nPremium sound quality with noise cancellation!";
+    }
+
+    if (msg.match(/(watch|smartwatch)/)) {
+      return "Our Smartwatch is available for $399.99: https://luxe-store-lilac.vercel.app/product/2\n\nIncludes fitness tracking and heart rate monitoring!";
+    }
+
+    if (msg.match(/(speaker|bluetooth)/)) {
+      return "View our Portable Speaker for $149.99: https://luxe-store-lilac.vercel.app/product/3\n\n360° sound with 20-hour battery life!";
+    }
+
+    if (msg.match(/(camera|photography)/)) {
+      return "Our Professional Camera is $1,299.99: https://luxe-store-lilac.vercel.app/product/4\n\n4K video and professional-grade features!";
+    }
+
+    if (msg.match(/(shoe|footwear|sneaker|running|trainer)/)) {
+      return "Our Running Shoes are $159.99: https://luxe-store-lilac.vercel.app/product/5\n\nAdvanced cushioning technology and breathable design!";
+    }
+
+    if (msg.match(/(backpack|bag)/)) {
+      return "Check out our Designer Backpack for $129.99: https://luxe-store-lilac.vercel.app/product/6\n\nDurable and stylish with laptop compartment!";
+    }
+
+    if (msg.match(/(wallet)/)) {
+      return "Our Leather Wallet is $79.99: https://luxe-store-lilac.vercel.app/product/7\n\nGenuine leather with RFID protection!";
+    }
+
+    if (msg.match(/(sunglass|shades)/)) {
+      return "View our Sunglasses for $189.99: https://luxe-store-lilac.vercel.app/product/8\n\nUV400 protection with polarized lenses!";
+    }
+
+    // General link requests
     if (msg.match(/(link|url|where to buy|show me|buy|purchase)/)) {
-      return "You can browse all our products here: https://luxe-store-lilac.vercel.app/shop\n\nWhat product are you looking for? I can help you find it!";
-    }
-
-    // Shoes/Footwear
-    if (msg.match(/(shoe|footwear|sneaker|boot|sandal|trainer)/)) {
-      if (msg.match(/(have|sell|got|any|do you)/)) {
-        return "Yes, we offer premium running shoes for $159.99 with advanced cushioning technology. View them here: https://luxe-store-lilac.vercel.app/shop (look for 'Running Shoes'). Free shipping included on orders over $100!";
-      }
-      return "Our footwear collection features high-performance running shoes priced at $159.99. View them here: https://luxe-store-lilac.vercel.app/shop";
-    }
-
-    // Electronics
-    if (msg.match(/(headphone|earbud|watch|smartwatch|speaker|camera|electronic|tech|gadget)/)) {
-      return "We carry premium electronics: wireless headphones ($299), smartwatches ($399), portable speakers ($149), and professional cameras ($1,299). View them here: https://luxe-store-lilac.vercel.app/shop (filter by 'Electronics'). All include a 1-year warranty!";
-    }
-
-    // Accessories
-    if (msg.match(/(wallet|backpack|bag|sunglass|accessory|accessories)/)) {
-      return "Our accessories collection includes leather wallets ($79.99), designer backpacks ($129.99), and polarized sunglasses ($189.99). Browse them here: https://luxe-store-lilac.vercel.app/shop (filter by 'Accessories')";
+      return "Browse all products: https://luxe-store-lilac.vercel.app/shop\n\nTell me what you're looking for and I'll send you the direct link!";
     }
 
     // Price questions
     if (msg.match(/(how much|price|cost|expensive|cheap)/)) {
-      return "Our products range from $79.99 to $1,299.99. View all products and prices here: https://luxe-store-lilac.vercel.app/shop. Free shipping on orders over $100!";
+      return "Our products range from $79.99 to $1,299.99. View all: https://luxe-store-lilac.vercel.app/shop\n\nFree shipping on orders over $100!";
     }
 
     // Shipping
@@ -157,12 +172,12 @@ export function ChatBot() {
 
     // Browsing/Shopping
     if (msg.match(/(browse|shop|see|show|looking for|want to)/)) {
-      return "You can browse our full catalog here: https://luxe-store-lilac.vercel.app/shop\n\nProducts can be filtered by category (Electronics, Accessories, Footwear) and sorted by price or rating. What are you looking for?";
+      return "Browse our full catalog: https://luxe-store-lilac.vercel.app/shop\n\nOr tell me what specific product you're interested in and I'll send you the direct link!";
     }
 
     // What do you sell
     if (msg.match(/(what|which|tell me).*(sell|have|offer|product)/)) {
-      return "We offer premium Electronics (headphones, smartwatches, speakers, cameras), Accessories (wallets, backpacks, sunglasses), and Footwear (running shoes). Browse all products: https://luxe-store-lilac.vercel.app/shop";
+      return "We offer:\n• Electronics (headphones, smartwatches, speakers, cameras)\n• Accessories (wallets, backpacks, sunglasses)\n• Footwear (running shoes)\n\nBrowse all: https://luxe-store-lilac.vercel.app/shop or ask me for a specific product link!";
     }
 
     // Contact/Agent
@@ -171,7 +186,7 @@ export function ChatBot() {
     }
 
     // Default - more helpful
-    return "I'm here to assist you. I can provide information about:\n• Products & Pricing\n• Shipping & Delivery\n• Returns & Refunds\n• Payment Options\n\nBrowse our store: https://luxe-store-lilac.vercel.app/shop\n\nWhat would you like to know?";
+    return "I'm here to help! I can provide direct links to any product.\n\nTry asking:\n• 'Show me headphones'\n• 'Link to running shoes'\n• 'Do you have cameras?'\n\nOr browse all: https://luxe-store-lilac.vercel.app/shop";
   };
 
   const handleSendMessage = async () => {
