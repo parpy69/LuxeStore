@@ -99,7 +99,7 @@ export default function CollectionsPage() {
         {/* Bottom CTA */}
         <div className="mt-16 text-center">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
-            Can't Find What You're Looking For?
+            Can&apos;t Find What You&apos;re Looking For?
           </h2>
           <p className="text-xl text-gray-600 mb-8">
             Browse all our products or get in touch with our team

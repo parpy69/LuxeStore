@@ -77,8 +77,8 @@ export default function AboutPage() {
             </div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6">About LuxeStore</h1>
             <p className="text-xl text-blue-100 leading-relaxed">
-              We're on a mission to bring you the finest products that blend quality, 
-              style, and innovation. Since 2020, we've been curating exceptional items 
+              We&apos;re on a mission to bring you the finest products that blend quality, 
+              style, and innovation. Since 2020, we&apos;ve been curating exceptional items 
               that elevate everyday living.
             </p>
           </div>
@@ -118,7 +118,7 @@ export default function AboutPage() {
                   quality and craftsmanship.
                 </p>
                 <p>
-                  Today, we're proud to be a trusted destination for those who appreciate 
+                  Today, we&apos;re proud to be a trusted destination for those who appreciate 
                   the finer things in life, from cutting-edge electronics to timeless 
                   accessories.
                 </p>
