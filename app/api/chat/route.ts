@@ -9,14 +9,21 @@ export async function POST(request: NextRequest) {
   try {
     const { message } = await request.json();
 
-    // Try to use Groq AI if API key is configured
-    if (process.env.GROQ_API_KEY) {
-      try {
-        const chatCompletion = await groq.chat.completions.create({
-          messages: [
-            {
-              role: "system",
-              content: `You are a helpful customer service assistant for LuxeStore, a premium e-commerce website.
+    // Check if API key exists
+    if (!process.env.GROQ_API_KEY) {
+      console.log("⚠️ GROQ_API_KEY not found - using fallback responses");
+      const reply = getFallbackResponse(message);
+      return NextResponse.json({ reply, source: "fallback", reason: "no_api_key" });
+    }
+
+    // Try to use Groq AI
+    console.log("✅ GROQ_API_KEY found - attempting Groq API call");
+    try {
+      const chatCompletion = await groq.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content: `You are a helpful customer service assistant for LuxeStore, a premium e-commerce website.
 
 Store Information:
 - We sell Electronics (wireless headphones $299.99, smartwatches $399.99, portable speakers $149.99, cameras $1,299.99)
@@ -35,31 +42,29 @@ Guidelines:
 - Stay focused on helping customers find products and answering store-related questions
 - For complaints, apologize professionally and offer to escalate to a live agent
 - Always try to redirect back to products and assistance`,
-            },
-            {
-              role: "user",
-              content: message,
-            },
-          ],
-          model: "llama3-8b-8192",
-          temperature: 0.7,
-          max_tokens: 150,
-        });
+          },
+          {
+            role: "user",
+            content: message,
+          },
+        ],
+        model: "llama3-8b-8192",
+        temperature: 0.7,
+        max_tokens: 150,
+      });
 
-        const reply = chatCompletion.choices[0]?.message?.content || getFallbackResponse(message);
-        return NextResponse.json({ reply });
-      } catch (groqError) {
-        console.log("Groq API error, using fallback");
-      }
+      const reply = chatCompletion.choices[0]?.message?.content || getFallbackResponse(message);
+      console.log("✅ Groq API success");
+      return NextResponse.json({ reply, source: "groq" });
+    } catch (groqError: any) {
+      console.error("❌ Groq API error:", groqError.message);
+      const reply = getFallbackResponse(message);
+      return NextResponse.json({ reply, source: "fallback", reason: "groq_error", error: groqError.message });
     }
-
-    // Fallback to smart hardcoded responses
-    const reply = getFallbackResponse(message);
-    return NextResponse.json({ reply });
-  } catch (error) {
-    console.error("Chat error:", error);
+  } catch (error: any) {
+    console.error("❌ Chat error:", error);
     return NextResponse.json(
-      { reply: "I apologize for the inconvenience. Please try again or request a live agent." },
+      { reply: "I apologize for the inconvenience. Please try again or request a live agent.", source: "error" },
       { status: 500 }
     );
   }

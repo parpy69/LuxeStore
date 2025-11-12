@@ -34,7 +34,7 @@ export function ChatBot() {
   }, [messages]);
 
   const getAIResponse = async (userMessage: string): Promise<string> => {
-    // Try to use Ollama API first
+    // Try to use API
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -46,13 +46,21 @@ export function ChatBot() {
 
       if (response.ok) {
         const data = await response.json();
+        console.log("🤖 Response source:", data.source || "unknown");
+        if (data.reason) {
+          console.log("ℹ️ Reason:", data.reason);
+        }
+        if (data.error) {
+          console.error("⚠️ API Error:", data.error);
+        }
         return data.reply;
       }
     } catch (error) {
-      console.error("API error, using fallback");
+      console.error("❌ API error, using local fallback:", error);
     }
 
     // Fallback to local logic
+    console.log("🔄 Using local fallback responses");
     return getLocalResponse(userMessage);
   };
 
