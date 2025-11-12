@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export function Hero() {
   return (
     <section className="relative bg-gradient-to-br from-blue-50 via-white to-purple-50 overflow-hidden">
@@ -22,18 +24,18 @@ export function Hero() {
               purchase.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
+              <Link
                 href="/shop"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-lg font-semibold transition-colors shadow-lg hover:shadow-xl text-center"
               >
                 Shop Now
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/collections"
                 className="border-2 border-gray-300 hover:border-gray-400 text-gray-700 px-8 py-4 rounded-lg font-semibold transition-colors text-center"
               >
                 View Collections
-              </a>
+              </Link>
             </div>
             <div className="flex items-center gap-8 pt-4">
               <div>
@@ -57,14 +59,16 @@ export function Hero() {
           <div className="relative">
             <div className="grid grid-cols-2 gap-4">
               <div className="space-y-4">
-                <div className="aspect-square rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform">
+                <div className="aspect-square rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="https://images.unsplash.com/photo-1560343090-f0409e92791a?w=500&q=80"
                     alt="Fashion"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?w=500&q=80"
                     alt="Accessories"
@@ -73,14 +77,16 @@ export function Hero() {
                 </div>
               </div>
               <div className="space-y-4 pt-8">
-                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform">
+                <div className="aspect-[4/3] rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=500&q=80"
                     alt="Electronics"
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="aspect-square rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform">
+                <div className="aspect-square rounded-2xl overflow-hidden shadow-lg transform hover:scale-105 transition-transform relative">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=80"
                     alt="Store"

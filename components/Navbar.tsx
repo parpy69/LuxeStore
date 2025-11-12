@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { ShoppingCart, Menu, X, Search } from "lucide-react";
 import { useCart } from "@/context/CartContext";
 import { Cart } from "./Cart";
@@ -17,39 +18,39 @@ export function Navbar() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex-shrink-0 flex items-center">
-              <a href="/">
+              <Link href="/">
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent cursor-pointer">
                   LuxeStore
                 </h1>
-              </a>
+              </Link>
             </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-              <a
+              <Link
                 href="/shop"
                 className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
               >
                 Shop
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/collections"
                 className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
               >
                 Collections
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/about"
                 className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
               >
                 About
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/contact"
                 className="text-gray-700 hover:text-blue-600 transition-colors font-medium"
               >
                 Contact
-              </a>
+              </Link>
             </div>
 
             {/* Right Side Icons */}
@@ -89,30 +90,30 @@ export function Navbar() {
         {isMobileMenuOpen && (
           <div className="md:hidden border-t border-gray-200">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <a
+              <Link
                 href="/shop"
                 className="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md font-medium"
               >
                 Shop
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/collections"
                 className="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md font-medium"
               >
                 Collections
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/about"
                 className="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md font-medium"
               >
                 About
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/contact"
                 className="block px-3 py-2 text-gray-700 hover:bg-gray-50 rounded-md font-medium"
               >
                 Contact
-              </a>
+              </Link>
             </div>
           </div>
         )}

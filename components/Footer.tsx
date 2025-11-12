@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Facebook, Twitter, Instagram, Mail } from "lucide-react";
 
 export function Footer() {
@@ -21,36 +22,36 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-4">Shop</h3>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   href="/shop"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   All Products
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/collections"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Collections
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/shop"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Best Sellers
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/shop"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Sale
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -60,36 +61,36 @@ export function Footer() {
             <h3 className="font-semibold text-lg mb-4">Support</h3>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   href="/contact"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Contact Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/contact"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   FAQs
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/about"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   About Us
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/contact"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
                   Returns
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
