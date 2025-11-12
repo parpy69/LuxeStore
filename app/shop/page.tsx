@@ -67,23 +67,24 @@ export default function ShopPage() {
             <div className="w-full lg:w-auto">
               <div className="flex items-center gap-2 mb-3">
                 <Filter size={20} className="text-blue-600" />
-                <span className="text-gray-700 font-semibold">Filter by Category</span>
+                <span className="text-gray-700 font-semibold">Filter by Category:</span>
               </div>
               <div className="flex items-center gap-2 flex-wrap">
                 {categories.map((category) => (
                   <button
                     key={category}
                     onClick={() => setSelectedCategory(category)}
-                    className={`px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm ${
+                    className={`px-5 py-2.5 rounded-lg font-medium transition-all shadow-sm cursor-pointer ${
                       selectedCategory === category
-                        ? "bg-blue-600 text-white shadow-md scale-105"
-                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow"
+                        ? "bg-blue-600 text-white shadow-md scale-105 ring-2 ring-blue-300"
+                        : "bg-gray-100 text-gray-700 hover:bg-gray-200 hover:shadow hover:scale-105 border-2 border-gray-200"
                     }`}
                   >
                     {category}
                   </button>
                 ))}
               </div>
+              <p className="text-xs text-gray-500 mt-2">👆 Click a category to filter products</p>
             </div>
 
             {/* Sort Dropdown */}
