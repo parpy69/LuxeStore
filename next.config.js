@@ -9,6 +9,12 @@ const nextConfig = {
     ],
   },
   trailingSlash: false,
+  eslint: {
+    ignoreDuringBuilds: false,
+  },
+  typescript: {
+    ignoreBuildErrors: false,
+  },
 };
 
 module.exports = nextConfig;
