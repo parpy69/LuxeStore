@@ -58,7 +58,6 @@ export function ChatBot() {
   };
 
   const getAIResponse = async (userMessage: string): Promise<string> => {
-    // Try to use API
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
@@ -68,149 +67,18 @@ export function ChatBot() {
         body: JSON.stringify({ message: userMessage }),
       });
 
-      if (response.ok) {
-        const data = await response.json();
-        console.log("🤖 Response source:", data.source || "unknown");
-        if (data.reason) {
-          console.log("ℹ️ Reason:", data.reason);
-        }
-        if (data.error) {
-          console.error("⚠️ API Error:", data.error);
-        }
-        return data.reply;
+      const data = await response.json();
+      console.log("🤖 Response source:", data.source || "unknown");
+      
+      if (data.error) {
+        console.error("⚠️ API Error:", data.error);
       }
+      
+      return data.reply;
     } catch (error) {
-      console.error("❌ API error, using local fallback:", error);
+      console.error("❌ API connection error:", error);
+      return "I'm currently experiencing technical difficulties. Please request a live agent for immediate assistance.";
     }
-
-    // Fallback to local logic
-    console.log("🔄 Using local fallback responses");
-    return getLocalResponse(userMessage);
-  };
-
-  const getLocalResponse = (userMessage: string): string => {
-    const msg = userMessage.toLowerCase();
-
-    // Greetings
-    if (msg.match(/^(hi|hello|hey|good morning|good afternoon|good evening|sup|yo)$/)) {
-      return "Hello! Welcome to LuxeStore. How may I assist you today?";
-    }
-
-    // Thanks
-    if (msg.match(/(thank|thanks|thx|appreciate)/)) {
-      return "You're very welcome! Is there anything else I can assist you with today?";
-    }
-
-    // Compliments
-    if (msg.match(/(good job|great|awesome|amazing|excellent|love it|fantastic|wonderful|nice|cool|impressive|well done)/)) {
-      return "Thank you for the kind words! I'm here to help you find what you need. Is there anything specific I can assist you with today?";
-    }
-
-    // Website complaints - MORE SPECIFIC MATCHING
-    if (msg.includes("website") || msg.includes("site") || msg.includes("store") || msg.includes("page")) {
-      if (msg.match(/(don'?t like|hate|ugly|bad|terrible|not good|dislike)/)) {
-        return "I apologize for your experience. Your feedback is valuable to us. Could you specify what you'd like to see improved? I can also connect you with our team via the 'Request Live Agent' button for further assistance.";
-      }
-      if (msg.match(/(look|design|layout|appearance)/)) {
-        return "Thank you for your feedback on our design. We continuously work to improve our user experience. What specific changes would you suggest? Feel free to request a live agent if you'd like to discuss this in detail.";
-      }
-    }
-
-    // General complaints
-    if (msg.match(/(problem|issue|complaint|not working|broken|error)/)) {
-      return "I apologize for the inconvenience. I'm here to help resolve this. Could you provide more details about the issue? Alternatively, click 'Request Live Agent' for immediate assistance.";
-    }
-
-    // Specific product requests
-    if (msg.match(/(headphone|earphone|earbud|audio)/)) {
-      return "Check out our Wireless Headphones for $299.99: https://luxe-store-lilac.vercel.app/product/1\n\nPremium sound quality with noise cancellation!";
-    }
-
-    if (msg.match(/(watch|smartwatch)/)) {
-      return "Our Smartwatch is available for $399.99: https://luxe-store-lilac.vercel.app/product/2\n\nIncludes fitness tracking and heart rate monitoring!";
-    }
-
-    if (msg.match(/(backpack|bag)/)) {
-      return "Check out our Designer Backpack for $129.99: https://luxe-store-lilac.vercel.app/product/3\n\nDurable and stylish with laptop compartment!";
-    }
-
-    if (msg.match(/(wallet)/)) {
-      return "Our Leather Wallet is $79.99: https://luxe-store-lilac.vercel.app/product/4\n\nGenuine leather with RFID protection!";
-    }
-
-    if (msg.match(/(shoe|footwear|sneaker|running|trainer)/)) {
-      return "Our Running Shoes are $159.99: https://luxe-store-lilac.vercel.app/product/5\n\nAdvanced cushioning technology and breathable design!";
-    }
-
-    if (msg.match(/(sunglass|shades)/)) {
-      return "View our Sunglasses for $189.99: https://luxe-store-lilac.vercel.app/product/6\n\nUV400 protection with polarized lenses!";
-    }
-
-    if (msg.match(/(speaker|bluetooth)/)) {
-      return "View our Portable Speaker for $149.99: https://luxe-store-lilac.vercel.app/product/7\n\n360° sound with 20-hour battery life!";
-    }
-
-    if (msg.match(/(camera|photography)/)) {
-      return "Our Premium Camera is $1,299.99: https://luxe-store-lilac.vercel.app/product/8\n\n4K video and professional-grade features!";
-    }
-
-    // General link requests
-    if (msg.match(/(link|url|where to buy|show me|buy|purchase)/)) {
-      return "Browse all products: https://luxe-store-lilac.vercel.app/shop\n\nTell me what you're looking for and I'll send you the direct link!";
-    }
-
-    // Price questions
-    if (msg.match(/(how much|price|cost|expensive|cheap)/)) {
-      return "Our products range from $79.99 to $1,299.99. View all: https://luxe-store-lilac.vercel.app/shop\n\nFree shipping on orders over $100!";
-    }
-
-    // Shipping
-    if (msg.match(/(ship|deliver|delivery|shipping|send)/)) {
-      return "We offer free shipping on orders over $100. Standard delivery takes 3-5 business days. Express shipping (1-2 days) is available for $15. We ship nationwide.";
-    }
-
-    // Returns
-    if (msg.match(/(return|refund|exchange|money back|send back)/)) {
-      return "We have a 30-day return policy. Products must be unused and in original packaging. Returns are free, and refunds are processed within 5-7 business days.";
-    }
-
-    // Payment
-    if (msg.match(/(payment|pay|card|visa|mastercard|paypal|apple pay)/)) {
-      return "We accept all major credit cards, PayPal, Apple Pay, and Google Pay. All transactions are secured with 256-bit encryption for your protection.";
-    }
-
-    // Discounts/Sales
-    if (msg.match(/(discount|sale|deal|coupon|promo|offer)/)) {
-      return "Sign up for our newsletter to receive 10% off your first order. We also run regular promotional sales. Currently, all orders over $100 qualify for free shipping.";
-    }
-
-    // Quality questions
-    if (msg.match(/(quality|good|worth|recommend|review|rating)/)) {
-      return "Our products maintain an average 4.7/5 star rating from over 10,000 customers. We work directly with manufacturers to ensure premium quality and offer a 100% satisfaction guarantee.";
-    }
-
-    // In stock questions
-    if (msg.match(/(in stock|available|stock|inventory)/)) {
-      return "We currently have 8 premium products in stock across our Electronics, Accessories, and Footwear categories. All items are ready to ship. Which category would you like to explore?";
-    }
-
-    // Browsing/Shopping
-    if (msg.match(/(browse|shop|see|show|looking for|want to)/)) {
-      return "Browse our full catalog: https://luxe-store-lilac.vercel.app/shop\n\nOr tell me what specific product you're interested in and I'll send you the direct link!";
-    }
-
-    // What do you sell
-    if (msg.match(/(what|which|tell me).*(sell|have|offer|product)/)) {
-      return "We offer:\n• Electronics (headphones, smartwatches, speakers, cameras)\n• Accessories (wallets, backpacks, sunglasses)\n• Footwear (running shoes)\n\nBrowse all: https://luxe-store-lilac.vercel.app/shop or ask me for a specific product link!";
-    }
-
-    // Contact/Agent
-    if (msg.match(/(agent|human|person|talk to someone|contact|help|support)/)) {
-      return "For personalized assistance, please click the 'Request Live Agent' button below. A team member will be with you within 2-3 minutes.";
-    }
-
-    // Default - more helpful
-    return "I'm here to help! I can provide direct links to any product.\n\nTry asking:\n• 'Show me headphones'\n• 'Link to running shoes'\n• 'Do you have cameras?'\n\nOr browse all: https://luxe-store-lilac.vercel.app/shop";
   };
 
   const handleSendMessage = async () => {
